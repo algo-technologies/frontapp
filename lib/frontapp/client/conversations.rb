@@ -36,6 +36,26 @@ module Frontapp
       end
 
       # Parameters
+      # Name             Type    Description
+      # ------------------------------------
+      # conversation_id  string  Id of the requested conversation
+      # ------------------------------------
+      #
+      # Allowed attributes:
+      # Name          Type                Description
+      # ---------------------------------------------
+      # assignee_id   string (optional)   ID of the teammate to assign the conversation to. Set it to null to unassign.
+      # inbox_id      string (optional)   ID of the inbox to move the conversation to.
+      # status        enum (optional)     New status of the conversation
+      # tags          array (optional)    List of all the tag names replacing the old conversation tags
+      # ---------------------------------------------
+      # The assignee id is their Frontapp handle, e.g. @username
+      def update_conversation_assignee!(conversation_id, params = {})
+        cleaned = params.permit(:assignee_id)
+        update("conversations/#{conversation_id}/assignee", cleaned)
+      end
+
+      # Parameters
       # Name         Type    Description
       # --------------------------------
       # conversation_id  string  Id or email of the requested conversation
