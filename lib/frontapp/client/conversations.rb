@@ -52,7 +52,7 @@ module Frontapp
       # The assignee id is their Frontapp handle, e.g. @username
       def update_conversation_assignee!(conversation_id, params = {})
         cleaned = params.permit(:assignee_id)
-        update("conversations/#{conversation_id}/assignee", cleaned)
+        put("conversations/#{conversation_id}/assignee", cleaned)
       end
 
       # Parameters
