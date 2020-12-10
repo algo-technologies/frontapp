@@ -108,6 +108,13 @@ module Frontapp
       end
     end
 
+    def put(path, body)
+      res = @headers.put("#{base_url}#{path}", json: body)
+      if !res.status.success?
+        raise Error.from_response(res)
+      end
+    end
+
     def delete(path, body = {})
       res = @headers.delete("#{base_url}#{path}", json: body)
       if !res.status.success?
